@@ -28,12 +28,25 @@ import "./Board.css";
  **/
 
 function Board({ nrows, ncols, chanceLightStartsOn }) {
-  const [board, setBoard] = useState(createBoard());
+  const [board, setBoard] = useState(createBoard(nrows, ncols));
+
+  function randomTF() {
+    return Math.random() > 0.5;
+  }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-  function createBoard() {
-    let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+  function createBoard(nrows, ncols) {
+    let initialBoard = Array(nrows)
+      .fill()
+      .map(() => Array(ncols).fill());
+
+    // create array-of-arrays of true/false values
+    for (let i = 0; i < initialBoard.length; i++) {
+      for (let j = 0; j < initialBoard[0].length; j++) {
+        initialBoard[i][j] = randomTF();
+        console.log(i, j, initialBoard);
+      }
+    }
     return initialBoard;
   }
 
@@ -42,7 +55,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function flipCellsAround(coord) {
-    setBoard(oldBoard => {
+    setBoard((oldBoard) => {
       const [y, x] = coord.split("-").map(Number);
 
       const flipCell = (y, x, boardCopy) => {
@@ -63,7 +76,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   // if the game is won, just show a winning msg & render nothing else
 
-  // TODO
+  // TODO:
 
   // make table board
 
