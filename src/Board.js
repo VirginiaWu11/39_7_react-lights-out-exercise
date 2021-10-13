@@ -51,7 +51,15 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+    // check the board in state to determine whether the player has won.
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[0].length; j++) {
+        if (board[i][j] === true) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   function flipCellsAround(coord) {
