@@ -1,0 +1,38 @@
+grid of Lights
+
+0 unlit
+1 lit
+
+won = when all lights are off
+
+click a cell to toggle the light, it also toggles the light above, left of it, right of it, and below it. 
+
+0 0 0 1 0 
+0 0 1 0 1 
+0 1 0 1 0 
+0 0 1 0 0
+
+
+0 0 0   
+0 1 0
+0 0 0
+
+0,0 0,1 0,2
+1,0 1,1 1,2
+2,0 2,1 2,2
+
+i = horizontal outer loop
+j = vertical inner loop
+
+click on 1,0 => update itself &
+(1-1,0)
+(1+1,0)
+(1,0-1)
+(1,0+1)
+
+parent = board
+board => individual lights on or off, position on board x,y
+
+each light needs to know the position above below left and right, on or off
+
+better to have the state at the parent
