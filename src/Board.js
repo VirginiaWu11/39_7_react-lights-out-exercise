@@ -27,15 +27,15 @@ import "./Board.css";
  *
  **/
 
-function Board({ nrows, ncols, chanceLightStartsOn }) {
-  const [board, setBoard] = useState(createBoard(nrows, ncols));
+function Board({ nrows = 5, ncols = 5, chanceLightStartsOn }) {
+  const [board, setBoard] = useState(createBoard());
 
   function randomTF() {
     return Math.random() > 0.5;
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-  function createBoard(nrows, ncols) {
+  function createBoard() {
     let initialBoard = Array(nrows)
       .fill()
       .map(() => Array(ncols).fill());
@@ -90,12 +90,34 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   // if the game is won, just show a winning msg & render nothing else
-
-  // TODO:
+  // if (hasWon()) {
+  //   return <div>You Win!</div>;
+  // }
 
   // make table board
+  let tableBoard = [];
 
-  // TODO
+  for (let y = 0; y < nrows; y++) {
+    let row = [];
+    for (let x = 0; x < ncols; x++) {
+      let coord = `${y}-${x}`;
+      row.push(
+        <Cell
+          key={coord}
+          isLit={board[y][x]}
+          flipCellsAroundMe={() => flipCellsAround(coord)}
+        />
+      );
+    }
+    tableBoard.push(<tr key={y}>{row}</tr>);
+  }
+  console.log(tableBoard);
+  return (
+    <table className="Board">
+      <caption>Lights Out</caption>
+      <tbody>{tableBoard}</tbody>
+    </table>
+  );
 }
 
 export default Board;

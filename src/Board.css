@@ -1,3 +1,7 @@
 .Board {
   margin: 0 auto;
 }
+
+caption {
+  font-size: 40px;
+}
